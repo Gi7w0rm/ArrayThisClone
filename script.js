@@ -120,10 +120,9 @@ function clearAll() {
 
 function getDefaultPlaceholder() {
     return `Enter your values (one per line)
-
 Limits:
 - Maximum ${(CHAR_LIMIT).toLocaleString()} characters
-- Maximum ${LINE_LIMIT.toLocaleString()} lines
+- Maximum ${LINE_LIMIT.toLocaleString()} lines`;  // Added closing backtick here
 }
 
 function updateInputInfo() {
