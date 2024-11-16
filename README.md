@@ -8,7 +8,7 @@ I informed the owner of the original page about the compromise but have not hear
 ## Into
 A lightweight, secure web tool for converting line-separated values into array declarations for various programming languages.
 
-![ArrayThis Screenshot](screenshot.png)
+![ArrayThis Screenshot](ArrayThisClone.PNG)
 
 ## Features
 
