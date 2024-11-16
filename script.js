@@ -27,6 +27,8 @@ function getArrayDeclaration(language, arrayName, arrayContent) {
             return `$${arrayName} = [${arrayContent}];`;
         case 'Perl':
             return `@${arrayName} = (${arrayContent});`;
+        case 'PowerShell':
+            return `$${arrayName} = @(${arrayContent})`;
         case 'Raw':
             return arrayContent;
         default:
@@ -76,6 +78,7 @@ function convertArray() {
         'Python': getArrayDeclaration('Python', arrayName, arrayContent),
         'PHP': getArrayDeclaration('PHP', arrayName, arrayContent),
         'Perl': getArrayDeclaration('Perl', arrayName, arrayContent),
+        'PowerShell': getArrayDeclaration('PowerShell', arrayName, arrayContent),
         'Raw': getArrayDeclaration('Raw', arrayName, arrayContent)
     };
 
