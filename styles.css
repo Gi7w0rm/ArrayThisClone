@@ -7,11 +7,17 @@ body {
 }
 
 .container {
+    width: 90%;
     max-width: 800px;
     margin: 0 auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .input-section {
+    position: relative;
     margin-bottom: 20px;
 }
 
@@ -27,6 +33,38 @@ textarea {
 
 .options {
     margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.options label {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+select {
+    padding: 2px 5px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+#arrayName {
+    padding: 2px 5px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-size: 14px;
+    width: 120px;
+}
+
+#inputInfo {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    color: #666;
+    font-size: 12px;
+    text-align: right;
 }
 
 .buttons {
@@ -52,6 +90,10 @@ button.copy-btn {
     float: right;
     padding: 4px 8px;
     font-size: 0.8em;
+}
+
+#clearBtn {
+    background: #666;
 }
 
 .output-card {
@@ -85,10 +127,6 @@ button.copy-btn {
     word-break: break-all;
 }
 
-#clearBtn {
-    background: #666;
-}
-
 .success-message {
     position: fixed;
     top: 20px;
@@ -99,33 +137,6 @@ button.copy-btn {
     border-radius: 5px;
     display: none;
     animation: fadeInOut 2s ease-in-out;
-}
-
-.array-name-container {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.input-section {
-    position: relative;
-    margin-bottom: 20px;
-}
-
-#arrayName {
-    padding: 4px 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 12px;
-    width: 120px;
-}
-
-#arrayName:focus {
-    outline: none;
-    border-color: #666;
 }
 
 @keyframes fadeInOut {
