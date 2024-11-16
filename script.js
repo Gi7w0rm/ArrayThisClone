@@ -124,12 +124,6 @@ function getDefaultPlaceholder() {
 Limits:
 - Maximum ${(CHAR_LIMIT).toLocaleString()} characters
 - Maximum ${LINE_LIMIT.toLocaleString()} lines
-
-Example:
-value1
-value2
-123
-"quoted value"`;
 }
 
 function updateInputInfo() {
