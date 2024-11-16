@@ -8,10 +8,37 @@ function sanitizeHtml(str) {
     return div.innerHTML;
 }
 
+function sanitizeArrayName(name) {
+    // Remove any characters that aren't letters, numbers, or underscores
+    return name.replace(/[^a-zA-Z0-9_]/g, '')
+        // Ensure it doesn't start with a number
+        .replace(/^(\d)/, '_$1')
+        // If empty, provide a default
+        || 'array';
+}
+
+function getArrayDeclaration(language, arrayName, arrayContent) {
+    switch(language) {
+        case 'JavaScript':
+            return `var ${arrayName} = [${arrayContent}];`;
+        case 'Python':
+            return `${arrayName} = [${arrayContent}]`;
+        case 'PHP':
+            return `$${arrayName} = [${arrayContent}];`;
+        case 'Perl':
+            return `@${arrayName} = (${arrayContent});`;
+        case 'Raw':
+            return arrayContent;
+        default:
+            return `${arrayName} = [${arrayContent}]`;
+    }
+}
+
 function convertArray() {
     const input = document.getElementById("inputText").value;
     const quoteStyle = document.getElementById("quoteStyle").value === "double" ? '"' : "'";
     const quoteNumbers = document.getElementById("quoteNumbers").checked;
+    let arrayName = sanitizeArrayName(document.getElementById("arrayName").value);
 
     if (!input.trim()) {
         alert("Please enter some text.");
@@ -42,12 +69,14 @@ function convertArray() {
         }
     });
 
+    const arrayContent = array.join(", ");
+    
     const outputs = {
-        'JavaScript': `var array = [${array.join(", ")}];`,
-        'Python': `list_name = [${array.join(", ")}]`,
-        'PHP': `$array = [${array.join(", ")}];`,
-        'Perl': `@array = (${array.join(", ")});`,
-        'Raw': array.join(", ")
+        'JavaScript': getArrayDeclaration('JavaScript', arrayName, arrayContent),
+        'Python': getArrayDeclaration('Python', arrayName, arrayContent),
+        'PHP': getArrayDeclaration('PHP', arrayName, arrayContent),
+        'Perl': getArrayDeclaration('Perl', arrayName, arrayContent),
+        'Raw': getArrayDeclaration('Raw', arrayName, arrayContent)
     };
 
     const container = document.getElementById("outputContainer");
@@ -57,7 +86,7 @@ function convertArray() {
     }
 
     Object.entries(outputs).forEach(([language, code]) => {
-        // Create elements safely using DOM methods instead of innerHTML
+        // Create elements safely using DOM methods
         const card = document.createElement('div');
         card.className = 'output-card';
         
@@ -107,9 +136,14 @@ function showCopySuccess() {
 function clearAll() {
     const input = document.getElementById("inputText");
     const container = document.getElementById("outputContainer");
+    const arrayNameInput = document.getElementById("arrayName");
     
     if (input) {
         input.value = getDefaultPlaceholder();
+    }
+    
+    if (arrayNameInput) {
+        arrayNameInput.value = 'array';
     }
     
     // Clear container safely
@@ -122,7 +156,7 @@ function getDefaultPlaceholder() {
     return `Enter your values (one per line)
 Limits:
 - Maximum ${(CHAR_LIMIT).toLocaleString()} characters
-- Maximum ${LINE_LIMIT.toLocaleString()} lines`;  // Added closing backtick here
+- Maximum ${LINE_LIMIT.toLocaleString()} lines`;
 }
 
 function updateInputInfo() {
@@ -195,5 +229,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Initialize input info
         updateInputInfo();
+    }
+
+    // Add array name input validation
+    const arrayNameInput = document.getElementById("arrayName");
+    if (arrayNameInput) {
+        arrayNameInput.addEventListener('input', function() {
+            this.value = sanitizeArrayName(this.value);
+        });
     }
 });
