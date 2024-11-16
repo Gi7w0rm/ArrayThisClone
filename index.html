@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ArrayThis</title>
+    <title>ArrayThisClone</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -14,20 +14,28 @@
         </div>
         
         <div class="options">
-            <label>
-                Quotes:
-                <select id="quoteStyle">
-                    <option value="double">Double</option>
-                    <option value="single">Single</option>
-                </select>
-            </label>
-            <label>
-                <input type="checkbox" id="quoteNumbers"> Numbers in Quotes
-            </label>
-            <label>
-                Name:
-                <input type="text" id="arrayName" value="array" placeholder="Array name">
-            </label>
+            <div class="option-group">
+                <label>
+                    Quotes:
+                    <select id="quoteStyle">
+                        <option value="double">Double</option>
+                        <option value="single">Single</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="option-group">
+                <label>
+                    <input type="checkbox" id="quoteNumbers"> Numbers in Quotes
+                </label>
+            </div>
+
+            <div class="option-group">
+                <label>
+                    Name:
+                    <input type="text" id="arrayName" value="array" placeholder="Array name">
+                </label>
+            </div>
         </div>
 
         <div class="buttons">
