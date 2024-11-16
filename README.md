@@ -13,11 +13,12 @@ A lightweight, secure web tool for converting line-separated values into array d
 ## Features
 
 - Convert line-separated values into array declarations for:
-  - JavaScript
-  - Python
-  - PHP
-  - Perl
+  - JavaScript (`var arrayName = [...]`)
+  - Python (`arrayName = [...]`)
+  - PHP (`$arrayName = [...]`)
+  - Perl (`@arrayName = (...)`)
   - Raw array format
+- Customizable array name for each declaration
 - Customizable quote styles (single or double quotes)
 - Option to quote numeric values
 - One-click copying for each format
@@ -29,8 +30,9 @@ A lightweight, secure web tool for converting line-separated values into array d
 1. Enter your values in the text area, one per line
 2. Select quote style (single or double quotes)
 3. Choose whether to quote numeric values
-4. Click "Convert" to generate array declarations
-5. Use the "Copy" button next to each format to copy to clipboard
+4. Optionally customize the array name (defaults to "array")
+5. Click "Convert" to generate array declarations
+6. Use the "Copy" button next to each format to copy to clipboard
 
 ### Example Input
 ```
@@ -40,7 +42,7 @@ value2
 "quoted value"
 ```
 
-### Example Output
+### Example Default Output
 
 #### JavaScript
 ```javascript
@@ -70,6 +72,7 @@ $array = ["value1", "value2", 123, "quoted value"];
 - Input validation and sanitization
 - Safe DOM manipulation
 - Warning for large datasets
+- Array name sanitization (removes invalid characters)
 
 ## Technical Details
 
