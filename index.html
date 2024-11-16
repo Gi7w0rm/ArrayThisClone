@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ArrayThisClone - Text to Array Converter</title>
+    <title>ArrayThis</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>ArrayThis</h1>
-        <textarea id="inputText" placeholder="Paste your text list here..."></textarea>
+        <div class="input-section">
+            <textarea id="inputText" placeholder="Enter your values (one per line)"></textarea>
+        </div>
+        
         <div class="options">
             <label>
                 Quotes:
@@ -19,19 +21,20 @@
                 </select>
             </label>
             <label>
-                Numbers in Quotes:
-                <input type="checkbox" id="quoteNumbers">
+                <input type="checkbox" id="quoteNumbers"> Numbers in Quotes
             </label>
         </div>
+
         <div class="buttons">
             <button onclick="convertArray()">Convert</button>
-            <button onclick="clearAll()">Clear All</button>
+            <button id="clearBtn" onclick="clearAll()">Clear All</button>
         </div>
-        <div id="output">
-            <h2>Output</h2>
-            <div id="result"></div>
-        </div>
+
+        <div id="outputContainer"></div>
     </div>
+
+    <div id="copySuccess" class="success-message">Copied to clipboard!</div>
+
     <script src="script.js"></script>
 </body>
 </html>
