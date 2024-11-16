@@ -101,6 +101,33 @@ button.copy-btn {
     animation: fadeInOut 2s ease-in-out;
 }
 
+.array-name-container {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.input-section {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+#arrayName {
+    padding: 4px 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 12px;
+    width: 120px;
+}
+
+#arrayName:focus {
+    outline: none;
+    border-color: #666;
+}
+
 @keyframes fadeInOut {
     0% { opacity: 0; }
     10% { opacity: 1; }
