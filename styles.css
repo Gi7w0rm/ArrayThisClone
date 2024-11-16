@@ -25,34 +25,65 @@ textarea {
     width: 100%;
     height: 150px;
     padding: 10px;
-    padding-bottom: 30px; /* Added padding at bottom to make room for the counter */
+    padding-bottom: 30px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-family: monospace;
     margin-bottom: 10px;
 }
 
+#inputInfo {
+    position: absolute;
+    bottom: 20px;
+    right: 15px;
+    color: #666;
+    font-size: 12px;
+    text-align: right;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 2px 5px;
+    border-radius: 3px;
+    z-index: 1;
+}
+
 .options {
     margin-bottom: 20px;
     display: flex;
-    align-items: center;
+    align-items: stretch;
     gap: 20px;
+    flex-wrap: wrap;
 }
 
 .option-group {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     padding: 8px 12px;
     background: #f8f8f8;
     border: 1px solid #e0e0e0;
     border-radius: 5px;
+    flex: 1;
+    min-width: 200px;
+}
+
+.option-group:hover {
+    background: #f0f0f0;
+    border-color: #ccc;
 }
 
 .option-group label {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     gap: 8px;
     font-weight: 500;
+    width: 100%;
+}
+
+#arrayName {
+    padding: 4px 8px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-size: 14px;
+    flex: 1;
+    min-width: 100px;
 }
 
 select {
@@ -62,26 +93,17 @@ select {
     margin-left: 5px;
 }
 
-#arrayName {
-    padding: 4px 8px;
-    border: 1px solid #ddd;
-    border-radius: 3px;
-    font-size: 14px;
-    width: 150px;
-    margin-left: 5px;
+select:focus,
+#arrayName:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 0 2px rgba(74, 175, 80, 0.1);
 }
 
-#inputInfo {
-    position: absolute;
-    bottom: 20px; /* Adjusted from 10px */
-    right: 15px; /* Adjusted from 10px */
-    color: #666;
-    font-size: 12px;
-    text-align: right;
-    background: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
-    padding: 2px 5px;
-    border-radius: 3px;
-    z-index: 1; /* Ensure it stays above the textarea content */
+input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
 }
 
 .buttons {
@@ -163,23 +185,52 @@ button.copy-btn {
     100% { opacity: 0; }
 }
 
-/* Add hover effect for option groups */
-.option-group:hover {
-    background: #f0f0f0;
-    border-color: #ccc;
-}
+/* Media queries for mobile devices */
+@media screen and (max-width: 600px) {
+    .container {
+        width: 95%;
+        padding: 15px;
+    }
 
-/* Style for focus states */
-select:focus,
-#arrayName:focus {
-    outline: none;
-    border-color: #4CAF50;
-    box-shadow: 0 0 0 2px rgba(74, 175, 80, 0.1);
-}
+    .options {
+        flex-direction: column;
+        gap: 10px;
+    }
 
-/* Improve checkbox visibility */
-input[type="checkbox"] {
-    width: 16px;
-    height: 16px;
-    margin-right: 5px;
+    .option-group {
+        width: 100%;
+        min-width: unset;
+        margin: 0;
+    }
+
+    .option-group label {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        white-space: nowrap;
+    }
+
+    #arrayName {
+        width: 50%;
+        min-width: unset;
+    }
+
+    select {
+        width: 50%;
+        margin-left: auto;
+    }
+
+    .option-group label input[type="checkbox"] {
+        margin-left: auto;
+    }
+
+    .buttons {
+        display: flex;
+        gap: 10px;
+    }
+
+    button {
+        flex: 1;
+        margin: 0;
+    }
 }
