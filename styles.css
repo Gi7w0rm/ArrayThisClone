@@ -35,27 +35,39 @@ textarea {
     margin-bottom: 20px;
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 20px;
 }
 
-.options label {
+.option-group {
     display: inline-flex;
     align-items: center;
-    gap: 5px;
+    padding: 8px 12px;
+    background: #f8f8f8;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+}
+
+.option-group label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
 }
 
 select {
-    padding: 2px 5px;
+    padding: 4px 8px;
     border: 1px solid #ddd;
     border-radius: 3px;
+    margin-left: 5px;
 }
 
 #arrayName {
-    padding: 2px 5px;
+    padding: 4px 8px;
     border: 1px solid #ddd;
     border-radius: 3px;
     font-size: 14px;
-    width: 120px;
+    width: 150px;
+    margin-left: 5px;
 }
 
 #inputInfo {
@@ -144,4 +156,25 @@ button.copy-btn {
     10% { opacity: 1; }
     90% { opacity: 1; }
     100% { opacity: 0; }
+}
+
+/* Add hover effect for option groups */
+.option-group:hover {
+    background: #f0f0f0;
+    border-color: #ccc;
+}
+
+/* Style for focus states */
+select:focus,
+#arrayName:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 0 2px rgba(74, 175, 80, 0.1);
+}
+
+/* Improve checkbox visibility */
+input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
 }
