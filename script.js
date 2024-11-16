@@ -1,3 +1,7 @@
+// Constants for limits
+const CHAR_LIMIT = 100000;
+const LINE_LIMIT = 5000;
+
 function sanitizeHtml(str) {
     const div = document.createElement('div');
     div.textContent = str;
@@ -12,6 +16,14 @@ function convertArray() {
     if (!input.trim()) {
         alert("Please enter some text.");
         return;
+    }
+
+    // Additional safety check for processing time
+    const lineCount = (input.match(/\n/g) || []).length + 1;
+    if (lineCount > 5000) {
+        if (!confirm(`You are about to process ${lineCount.toLocaleString()} lines. This might take a while. Continue?`)) {
+            return;
+        }
     }
 
     // Sanitize and validate input
@@ -59,7 +71,6 @@ function convertArray() {
         const copyBtn = document.createElement('button');
         copyBtn.className = 'copy-btn';
         copyBtn.textContent = 'Copy';
-        // Use a closure to safely pass the language parameter
         copyBtn.addEventListener('click', () => copyToClipboard(language));
         
         const content = document.createElement('div');
@@ -97,7 +108,9 @@ function clearAll() {
     const input = document.getElementById("inputText");
     const container = document.getElementById("outputContainer");
     
-    if (input) input.value = "";
+    if (input) {
+        input.value = getDefaultPlaceholder();
+    }
     
     // Clear container safely
     while (container && container.firstChild) {
@@ -105,16 +118,89 @@ function clearAll() {
     }
 }
 
+function getDefaultPlaceholder() {
+    return `Enter your values (one per line)
+
+Limits:
+- Maximum ${(CHAR_LIMIT).toLocaleString()} characters
+- Maximum ${LINE_LIMIT.toLocaleString()} lines
+
+Example:
+value1
+value2
+123
+"quoted value"`;
+}
+
+function updateInputInfo() {
+    const input = document.getElementById("inputText");
+    const charCount = input.value.length;
+    const lineCount = (input.value.match(/\n/g) || []).length + 1;
+    
+    // Update textarea with current counts
+    const infoText = `Current:
+- ${charCount.toLocaleString()}/${CHAR_LIMIT.toLocaleString()} characters
+- ${lineCount.toLocaleString()}/${LINE_LIMIT.toLocaleString()} lines`;
+    
+    const infoElement = document.getElementById("inputInfo");
+    if (infoElement) {
+        infoElement.textContent = infoText;
+    }
+}
+
 // Add event listeners when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    // Limit input size to prevent DoS
     const inputText = document.getElementById("inputText");
+    
     if (inputText) {
+        // Set initial placeholder
+        inputText.value = getDefaultPlaceholder();
+        
+        // Create info element
+        const infoDiv = document.createElement('div');
+        infoDiv.id = 'inputInfo';
+        infoDiv.style.color = '#666';
+        infoDiv.style.fontSize = '12px';
+        infoDiv.style.marginTop = '5px';
+        inputText.parentNode.insertBefore(infoDiv, inputText.nextSibling);
+        
+        // Add input event listener
         inputText.addEventListener('input', function() {
-            if (this.value.length > 10000) { // Adjust limit as needed
-                this.value = this.value.slice(0, 10000);
-                alert("Input length limited to 10,000 characters");
+            // Check total character length
+            if (this.value.length > CHAR_LIMIT) {
+                this.value = this.value.slice(0, CHAR_LIMIT);
+                alert(`Input limited to ${CHAR_LIMIT.toLocaleString()} characters`);
+            }
+            
+            // Check number of lines
+            const lineCount = (this.value.match(/\n/g) || []).length + 1;
+            if (lineCount > LINE_LIMIT) {
+                // Keep only the first LINE_LIMIT lines
+                const lines = this.value.split('\n');
+                this.value = lines.slice(0, LINE_LIMIT).join('\n');
+                alert(`Input limited to ${LINE_LIMIT.toLocaleString()} lines`);
+            }
+            
+            updateInputInfo();
+        });
+
+        // On focus, if the content is the default, clear it
+        inputText.addEventListener('focus', function() {
+            if (this.value === getDefaultPlaceholder()) {
+                this.value = '';
+                updateInputInfo();
             }
         });
+
+        // On blur, if the content is empty, restore the default
+        inputText.addEventListener('blur', function() {
+            if (!this.value.trim()) {
+                this.value = getDefaultPlaceholder();
+                updateInputInfo();
+            }
+        });
+
+        // Initialize input info
+        updateInputInfo();
     }
 });
