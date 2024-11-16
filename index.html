@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArrayThis - Text to Array Converter</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>ArrayThis</h1>
+        <textarea id="inputText" placeholder="Paste your text list here..."></textarea>
+        <div class="options">
+            <label>
+                Quotes:
+                <select id="quoteStyle">
+                    <option value="double">Double</option>
+                    <option value="single">Single</option>
+                </select>
+            </label>
+            <label>
+                Numbers in Quotes:
+                <input type="checkbox" id="quoteNumbers">
+            </label>
+        </div>
+        <div class="buttons">
+            <button onclick="convertArray()">Convert</button>
+            <button onclick="clearAll()">Clear All</button>
+        </div>
+        <div id="output">
+            <h2>Output</h2>
+            <div id="result"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
