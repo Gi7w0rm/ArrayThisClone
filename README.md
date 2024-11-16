@@ -11,12 +11,12 @@ A lightweight, secure web tool for converting line-separated values into array d
 ![ArrayThis Screenshot](ArrayThisClone.PNG)
 
 ## Features
-
 - Convert line-separated values into array declarations for:
   - JavaScript (`var arrayName = [...]`)
   - Python (`arrayName = [...]`)
   - PHP (`$arrayName = [...]`)
   - Perl (`@arrayName = (...)`)
+  - PowerShell (`$arrayName = @(...)`)
   - Raw array format
 - Customizable array name for each declaration
 - Customizable quote styles (single or double quotes)
@@ -26,7 +26,6 @@ A lightweight, secure web tool for converting line-separated values into array d
 - Mobile-friendly responsive design
 
 ## Usage
-
 1. Enter your values in the text area, one per line
 2. Select quote style (single or double quotes)
 3. Choose whether to quote numeric values
@@ -64,8 +63,12 @@ $array = ["value1", "value2", 123, "quoted value"];
 @array = ("value1", "value2", 123, "quoted value");
 ```
 
-## Limits and Safety Features
+#### PowerShell
+```powershell
+$array = @("value1", "value2", 123, "quoted value")
+```
 
+## Limits and Safety Features
 - Maximum 100,000 characters input
 - Maximum 5,000 lines
 - HTML sanitization for XSS prevention
@@ -75,14 +78,12 @@ $array = ["value1", "value2", 123, "quoted value"];
 - Array name sanitization (removes invalid characters)
 
 ## Technical Details
-
 - Pure vanilla JavaScript (no dependencies)
 - Uses modern browser APIs (Clipboard API)
 - Mobile-responsive CSS
 - Cross-browser compatible
 
 ## Local Development
-
 1. Clone the repository:
 ```bash
 git clone https://github.com/Gi7w0rm/ArrayThisClone.git
@@ -93,16 +94,13 @@ git clone https://github.com/Gi7w0rm/ArrayThisClone.git
 No build process or dependencies required!
 
 ## Security
-
 ArrayThis implements several security measures:
-
 - HTML sanitization to prevent XSS attacks
 - Input length limiting to prevent DoS attacks
 - Safe DOM manipulation (no innerHTML usage)
 - Proper event handling and error management
 
 ## Browser Compatibility
-
 Tested and working in:
 - Chrome (latest)
 - Firefox (latest)
@@ -110,15 +108,12 @@ Tested and working in:
 - Edge (latest)
 
 ## License
-
 MIT License - feel free to use and modify as needed.
 
 ## Credits
-
 Inspired by the original ArrayThis tool (currently compromised). Built as a secure, modern alternative.
 
 ## Contributing
-
 1. Fork the repository
 2. Create your feature branch
 3. Commit your changes
