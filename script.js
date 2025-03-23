@@ -12,27 +12,29 @@ function sanitizeArrayName(name) {
     // Remove any characters that aren't letters, numbers, or underscores
     return name.replace(/[^a-zA-Z0-9_]/g, '')
         // Ensure it doesn't start with a number
-        .replace(/^(\d)/, '_$1')
-        // If empty, provide a default
-        || 'array';
+        .replace(/^(\d)/, '_$1');
+    // Removed the '|| array' to allow empty values during input
 }
 
 function getArrayDeclaration(language, arrayName, arrayContent) {
+    // Use default 'array' if the provided name is empty
+    const safeArrayName = arrayName || 'array';
+    
     switch(language) {
         case 'JavaScript':
-            return `var ${arrayName} = [${arrayContent}];`;
+            return `var ${safeArrayName} = [${arrayContent}];`;
         case 'Python':
-            return `${arrayName} = [${arrayContent}]`;
+            return `${safeArrayName} = [${arrayContent}]`;
         case 'PHP':
-            return `$${arrayName} = [${arrayContent}];`;
+            return `$${safeArrayName} = [${arrayContent}];`;
         case 'Perl':
-            return `@${arrayName} = (${arrayContent});`;
+            return `@${safeArrayName} = (${arrayContent});`;
         case 'PowerShell':
-            return `$${arrayName} = @(${arrayContent})`;
+            return `$${safeArrayName} = @(${arrayContent})`;
         case 'Raw':
             return arrayContent;
         default:
-            return `${arrayName} = [${arrayContent}]`;
+            return `${safeArrayName} = [${arrayContent}]`;
     }
 }
 
@@ -41,6 +43,7 @@ function convertArray() {
     const quoteStyle = document.getElementById("quoteStyle").value === "double" ? '"' : "'";
     const quoteNumbers = document.getElementById("quoteNumbers").checked;
     let arrayName = sanitizeArrayName(document.getElementById("arrayName").value);
+    // arrayName can now be empty, but it will be handled in getArrayDeclaration
 
     if (!input.trim()) {
         alert("Please enter some text.");
@@ -238,7 +241,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const arrayNameInput = document.getElementById("arrayName");
     if (arrayNameInput) {
         arrayNameInput.addEventListener('input', function() {
-            this.value = sanitizeArrayName(this.value);
+            // Allow empty values and only sanitize non-empty values
+            if (this.value) {
+                this.value = sanitizeArrayName(this.value);
+            }
         });
     }
 });
